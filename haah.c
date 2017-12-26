@@ -92,18 +92,16 @@ gcc -Wall haah.c -o haah.o
 //	Usage
 //===========================================================================================================================
 
- void Usage( void )
+ void Usage(void)
 {
-	fprintf( stderr, "\n" );
-	fprintf( stderr, "HAAH host to address - address to host " PROD_VERS "\n" );
-	fprintf( stderr, "  haah -4/6 host-or-ip-address\n" );
-    //fprintf(stderr, "%s: usage: %s [-4|-6] host | addr.\n", *argv, *argv);
-	fprintf( stderr, "\n" );
-	
-	fprintf( stderr, "  -4                              - ipv4\n" );	
-	fprintf( stderr, "  -6                              - ipv6\n" );
-	fprintf( stderr, "  -h[elp]                         - Help\n" );
-	fprintf( stderr, "\n" );
+	fprintf(stderr, "\n");
+	fprintf(stderr, "HAAH host to address - address to host " PROD_VERS "\n");
+	fprintf(stderr, "  haah -4/6 host-or-ip-address\n");
+	fprintf(stderr, "\n");
+	fprintf(stderr, "  -4           - ipv4\n");
+	fprintf(stderr, "  -6           - ipv6\n");
+	fprintf(stderr, "  -h[elp]      - Help\n");
+	fprintf(stderr, "\n");
 }
 
 
@@ -111,52 +109,53 @@ gcc -Wall haah.c -o haah.o
 //	ProcessArgs
 //===========================================================================================================================
 
-	char * name;
+	char * name = "";
 
-int ProcessArgs( int argc, char* argv[] )
+int ProcessArgs(int argc, char* argv[])
 {	
 	int	err =1;
 	int	i;
 
 			
-	if ( ( argc <= 1 ) || ( argc > 3 ) )
+	if ((argc <= 1) || (argc > 3))
 	{
 		Usage();
 		err = 0;
 		goto exit;
 	}
-	for ( i = 1; i < argc; ++i )
+
+	for (i = 1; i < argc; ++i)
 	{
-		if ( strcmp( argv[ i ], "-4" ) == 0 )
+		if (strcmp( argv[i], "-4") == 0)
 		{
 			hints.ai_family = AF_INET;
 		}
-		else if ( strcmp( argv[ i ], "-6" ) == 0 )
-		{
-			hints.ai_family = AF_INET6;
-		}
-		else if ( ( strcmp( argv[ i ], "-help" ) == 0 ) || 
-				 ( strcmp( argv[ i ], "-h" ) == 0 ) )
-		{
-			// Help
-			Usage();
-			err = 0;
-			goto exit;
-		}
-		else
-		{
-			//if (i>1)
-			name = argv[ i ];
-			
-		}
+		else 
+			if (strcmp(argv[i], "-6") == 0)
+			{
+				hints.ai_family = AF_INET6;
+			}
+			else
+				if ((strcmp( argv[i], "-help") == 0) || 
+					(strcmp( argv[i], "-h") == 0))
+				{
+					// Help
+					Usage();
+					err = 0;
+					goto exit;
+				}
+				else
+				{
+					name = argv[i];
+				}
 	}
-	if ( *name == '\0' )
+	if (*name == '\0')
 	{
 		name = "localhost";  // gethostname plutot gethostname(name, namelen);
 	}
 	
 exit:
-	return( err );
+	return err;
 }
 
 
@@ -173,7 +172,7 @@ int main(int argc, char **argv)
 	   return 1;
 
 #ifdef WIN32
-   err = WSAStartup( MAKEWORD( 2, 2 ), &wsd );
+   err = WSAStartup(MAKEWORD(2, 2), &wsd);
 #endif
 
    ret = getaddrinfo(name, NULL, &hints, &res);

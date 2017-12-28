@@ -29,6 +29,8 @@ gcc -Wall haah.c -o haah.o
 
 */
 
+#undef UNICODE
+
 #include <stdlib.h>
 #include <stdio.h>
 

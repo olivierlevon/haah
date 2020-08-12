@@ -186,7 +186,7 @@ int main(int argc, char **argv)
    for (ptr = res; ptr; ptr = ptr->ai_next) 
    {
       if (ptr->ai_canonname)
-         fprintf(stdout, "Canonical name:\n%s\nAdresses:\n", ptr->ai_canonname);
+         fprintf(stdout, "Canonical name:\n%s\nAddresses:\n", ptr->ai_canonname);
          
       switch (ptr->ai_family) 
       {

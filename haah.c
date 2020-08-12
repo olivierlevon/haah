@@ -22,7 +22,7 @@ Adresses:
 $
 
 Compiler sur Windows (Visual Studio 2017 Community / Windows 10 SDK)
-cl /DWIN32 haah.c ws2_32.lib /link /SUBSYSTEM:CONSOLE /MACHINE:X86 
+cl /DWIN32 haah.c /link /SUBSYSTEM:CONSOLE /MACHINE:X86 
 
 Compiler sur MacOS/Linux
 gcc -Wall haah.c -o haah.o
@@ -64,7 +64,7 @@ gcc -Wall haah.c -o haah.o
 #include <netinet/icmp6.h>
 
 
- int IN6_IS_ADDR_GLOBAL(const struct in6_addr *addr)
+int IN6_IS_ADDR_GLOBAL(const struct in6_addr *addr)
 {
       /* Normative reference: RFC4291 § 2.4 */
       return !(IN6_IS_ADDR_UNSPECIFIED(addr)
@@ -173,7 +173,7 @@ int main(int argc, char **argv)
 	   return 1;
 
 #ifdef WIN32
-   err = WSAStartup(MAKEWORD(2, 2), &wsd);
+   err = WSAStartup(WINSOCK_VERSION, &wsd);
 #endif
 
    ret = getaddrinfo(name, NULL, &hints, &res);
@@ -182,6 +182,7 @@ int main(int argc, char **argv)
       fprintf(stderr, "getaddrinfo: %s\n", gai_strerror(ret));
       return 1;
    }
+
    for (ptr = res; ptr; ptr = ptr->ai_next) 
    {
       if (ptr->ai_canonname)
@@ -199,7 +200,9 @@ int main(int argc, char **argv)
                fprintf(stderr, "inet_ntop: %s\n", strerror(errno));
                break;
             }
+
             fprintf(stdout, "%s\n", dst);
+
             break;
          } 
 
@@ -213,6 +216,7 @@ int main(int argc, char **argv)
                fprintf(stderr, "inet_ntop: %s\n", strerror(errno));
                break;
             }
+
 			if (IN6_IS_ADDR_GLOBAL(src))
 				fprintf(stdout, "%s (%d)\n", dst, ((struct sockaddr_in6 *)ptr->ai_addr)->sin6_scope_id); // pas le scope id
             else

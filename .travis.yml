@@ -1,0 +1,19 @@
+# HAAH's travis-ci.org integration file
+# Used to build Posix platform (Linux Ubuntu) version of HAAH
+
+#---------------------------------#
+#      general configuration      #
+#---------------------------------#
+
+language: c
+
+os: linux
+dist: xenial
+
+
+#---------------------------------#
+#       build configuration       #
+#---------------------------------#
+
+script: 
+  - gcc -Wall haah.c -o haah.o

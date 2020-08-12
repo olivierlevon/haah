@@ -1,7 +1,7 @@
-version: 1.0.0
+version: 1.1b{build}
 image: Visual Studio 2017
 configuration: Release
-platform: x86
+platform: x64
 build:
   project: haah.vcxproj
   verbosity: minimal

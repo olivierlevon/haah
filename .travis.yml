@@ -17,3 +17,4 @@ dist: xenial
 
 script: 
   - gcc -Wall haah.c -o haah.o
+  - ./haah ""

@@ -1,4 +1,9 @@
 version: 1.1b{build}
+skip_commits:
+  files:
+    - *.txt
+    - *.bat
+    - README*
 image: Visual Studio 2017
 configuration: Release
 platform: x64

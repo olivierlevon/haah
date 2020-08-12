@@ -21,7 +21,7 @@ Adresses:
 134.157.19.71
 $
 
-Compiler sur Windows (Windows Seven/Visual Studio 2017 Community)
+Compiler sur Windows (Visual Studio 2017 Community / Windows 10 SDK)
 cl /DWIN32 haah.c ws2_32.lib /link /SUBSYSTEM:CONSOLE /MACHINE:X86 
 
 Compiler sur MacOS/Linux
@@ -38,10 +38,10 @@ gcc -Wall haah.c -o haah.o
 
 #pragma comment(lib, "ws2_32.lib")
 
-#define _CRT_SECURE_NO_WARNINGS	1
-#define _CRT_SECURE_NO_DEPRECATE 1 
+#define _CRT_SECURE_NO_WARNINGS
+#define _CRT_SECURE_NO_DEPRECATE
 
-#define _WIN32_WINNT 0x0601
+#define _WIN32_WINNT 0x0A00
 
 #define WIN32_LEAN_AND_MEAN
 
@@ -49,7 +49,6 @@ gcc -Wall haah.c -o haah.o
 #include <winsock2.h>
 #include <ws2tcpip.h>
 #include <iphlpapi.h>
-
 
 
 #else

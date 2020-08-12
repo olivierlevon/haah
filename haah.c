@@ -29,14 +29,9 @@ gcc -Wall haah.c -o haah.o
 
 */
 
-#undef UNICODE
-
-#include <stdlib.h>
-#include <stdio.h>
-
 #ifdef WIN32
 
-#pragma comment(lib, "ws2_32.lib")
+#undef UNICODE
 
 #define _CRT_SECURE_NO_WARNINGS
 #define _CRT_SECURE_NO_DEPRECATE
@@ -45,11 +40,20 @@ gcc -Wall haah.c -o haah.o
 
 #define WIN32_LEAN_AND_MEAN
 
+#endif
+
+
+#include <stdlib.h>
+#include <stdio.h>
+
+#ifdef WIN32
+
 #include <windows.h>
 #include <winsock2.h>
 #include <ws2tcpip.h>
 #include <iphlpapi.h>
 
+#pragma comment(lib, "ws2_32.lib")
 
 #else
 
@@ -77,17 +81,20 @@ int IN6_IS_ADDR_GLOBAL(const struct in6_addr *addr)
 
 #define PROD_VERS "1.1"
 
-   struct addrinfo hints = {
-      AI_CANONNAME,
-      PF_UNSPEC,
-      SOCK_STREAM,
-      0,
-      0,
-      NULL,
-      NULL,
-      NULL
-   };
 
+struct addrinfo hints = {
+    AI_CANONNAME,
+    PF_UNSPEC,
+    SOCK_STREAM,
+    0,
+    0,
+    NULL,
+    NULL,
+    NULL
+};
+
+char hostname[512] = { 0 };
+char *name = "";
 
 //===========================================================================================================================
 //	Usage
@@ -110,9 +117,7 @@ int IN6_IS_ADDR_GLOBAL(const struct in6_addr *addr)
 //	ProcessArgs
 //===========================================================================================================================
 
-	char * name = "";
-
-int ProcessArgs(int argc, char* argv[])
+int ProcessArgs(int argc, char *argv[])
 {	
 	int	err =1;
 	int	i;
@@ -152,7 +157,11 @@ int ProcessArgs(int argc, char* argv[])
 	}
 	if (*name == '\0')
 	{
-		name = "localhost";  // gethostname plutot gethostname(name, namelen);
+		int rc = gethostname(hostname, sizeof(hostname));
+		if (rc != 0)
+			name = "localhost";
+		else
+			name = hostname;
 	}
 	
 exit:

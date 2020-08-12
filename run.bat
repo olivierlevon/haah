@@ -1,4 +1,4 @@
-set host=hostname
+set host=""
 
 haah %host%
 

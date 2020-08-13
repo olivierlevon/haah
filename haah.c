@@ -43,7 +43,7 @@ gcc -Wall haah.c -o haah.o
 #define _CRT_SECURE_NO_WARNINGS
 #define _CRT_SECURE_NO_DEPRECATE
 
-#define _WIN32_WINNT 0x0A00
+#define _WIN32_WINNT 0x0601
 
 #define WIN32_LEAN_AND_MEAN
 

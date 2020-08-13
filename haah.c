@@ -110,7 +110,7 @@ const char *name = "";
  void Usage(void)
 {
 	fprintf(stderr, "\n");
-	fprintf(stderr, "HAAH host to address - address to host " PROD_VERS "\n");
+	fprintf(stderr, "HAAH host to address - address to host, version " PROD_VERS "\n");
 	fprintf(stderr, "  haah -4/6 host-or-ip-address\n");
 	fprintf(stderr, "\n");
 	fprintf(stderr, "  -4           - ipv4\n");

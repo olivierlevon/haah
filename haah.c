@@ -1,5 +1,7 @@
 /*
 
+host-address-address-host
+
 http://livre.g6.asso.fr/index.php/La_commande_haah_%28host-address-address-host%29
 
 L'exemple proposé n'est autre qu'une sorte de nslookup (très) simplifié. 
@@ -11,15 +13,20 @@ L'extrait de session qui suit illustre l'utilisation de cette commande.
 $ haah bernays
 Canonical name:
 bernays.ipv6.logique.jussieu.fr
-Adresses:
+Addresses:
 2001:660:101:101:200:f8ff:fe31:17ec
 3ffe:304:101:1:200:f8ff:fe31:17ec
 $ haah 134.157.19.71
 Canonical name:
 bernays.logique.jussieu.fr
-Adresses:
+Addresses:
 134.157.19.71
 $
+
+
+Version agnostique du système d'exploitation 
+2020 Olivier Levon
+https://github.com/olivierlevon/haah
 
 Compiler sur Windows (Visual Studio 2017 Community / Windows 10 SDK)
 cl /DWIN32 haah.c /link /SUBSYSTEM:CONSOLE /MACHINE:X86 

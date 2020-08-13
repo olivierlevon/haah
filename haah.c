@@ -185,12 +185,17 @@ int main(int argc, char **argv)
 #endif
    struct addrinfo *res, *ptr;
  	
-   if (!ProcessArgs(argc, argv))
-	   return 1;
-
 #ifdef WIN32
    err = WSAStartup(WINSOCK_VERSION, &wsd);
+	if (err != 0)
+	{
+		fprintf(stderr, "WSAStartup failed with error: %d %s\n", err, strerror(errno));
+		return 1;
+	}
 #endif
+
+   if (!ProcessArgs(argc, argv))
+	   return 1;
 
    ret = getaddrinfo(name, NULL, &hints, &res);
    if (ret) 

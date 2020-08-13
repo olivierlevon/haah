@@ -126,7 +126,7 @@ const char *name = "";
 
 int ProcessArgs(int argc, char *argv[])
 {	
-	int	err =1;
+	int	err = 1;
 	int	i;
 
 			
@@ -180,8 +180,8 @@ int main(int argc, char **argv)
 {
    int ret;
 #ifdef WIN32
-   WSADATA		wsd;
-   HRESULT		err;
+   WSADATA wsd;
+   HRESULT err;
 #endif
    struct addrinfo *res, *ptr;
  	

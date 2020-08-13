@@ -68,12 +68,12 @@ gcc -Wall haah.c -o haah.o
 #include <errno.h>
 #include <sys/types.h>
 #include <sys/socket.h>
-#include <netinet/in.h> // struct in6_addr
+#include <netinet/in.h>  // struct in6_addr
 #include <netinet/ip6.h> // struct ip6_hdr
 #include <netdb.h>
-#include <arpa/inet.h> // inet_ntop()
-#include <netinet/icmp6.h>
-
+#include <arpa/inet.h>   // inet_ntop()
+//#include <netinet/icmp6.h>
+#include <unistd.h>
 
 int IN6_IS_ADDR_GLOBAL(const struct in6_addr *addr)
 {
